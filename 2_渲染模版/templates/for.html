@@ -1,0 +1,24 @@
+<!--
+ * @Author: kids0cn kids0cn@gmail.com
+ * @Date: 2024-09-30 19:17:10
+ * @LastEditors: kids0cn kids0cn@gmail.com
+ * @LastEditTime: 2024-09-30 19:17:59
+ * @FilePath: /learnFlask/2_渲染模版/templates/for.html
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>for循环</title>
+</head>
+<body>
+    {% for user in users %}
+        <p>用户名：{{ user.username }}，邮箱：{{ user.email }}</p>
+    {% endfor %}
+    
+</body>
+</html>
