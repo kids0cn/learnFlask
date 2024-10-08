@@ -2,14 +2,14 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 16:53:12
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-01 23:55:32
-FilePath: /learnFlask/3_鱼书/yushu_book.py
+LastEditTime: 2024-10-08 22:05:28
+FilePath: /learnFlask/3_鱼书/app/spider/yushu_book.py
 Description: 
 
 Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
 '''
 
-from myHttp import HTTP
+from app.libs.myHttp import HTTP
 from flask import current_app
 
 class YuShuBook:
@@ -32,6 +32,23 @@ class YuShuBook:
         }
         # current_app.logger.info(url)    
         result = HTTP.get(cls.douban_isbn_api+isbn,return_json=True,params=params,headers=headers)
+        '''
+        # 先从数据库查一下isbn，有的话直接返回
+        # 没有的话，调用豆瓣api
+        # 返回结果
+        参考伪代码
+        book = query_book_by_isbn(isbn)
+        if book:
+            return book
+        else:
+            result = HTTP.get(cls.douban_isbn_api+isbn,return_json=True,params=params,headers=headers)
+            if result.get('status') == 'success':
+                book = result.get('book')
+                return book
+            else:
+                return None
+
+        '''
         return result
     
     @classmethod

@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 18:33:09
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-01 18:54:43
+LastEditTime: 2024-10-08 15:52:13
 FilePath: /learnFlask/3_鱼书/app/__init__.py
 Description: 
     初始化的工作应该放到__init__.py中，这样就可以在其他文件中导入app
@@ -17,11 +17,19 @@ Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
 '''
 
 from flask import Flask
+from app.models.book import db # 要把db这个model跟这个app绑定
+
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('config')
+    app.config.from_object('app.config_secure')
+    app.config.from_object('app.config_setting')
     register_blueprint(app)
+
+    db.init_app(app) # 初始化db
+    with app.app_context():
+        db.create_all() # 创建数据表
+
     return app
 
 def register_blueprint(app):
