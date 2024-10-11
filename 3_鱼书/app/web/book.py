@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 17:13:43
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-11 17:53:40
+LastEditTime: 2024-10-11 18:22:21
 FilePath: /learnFlask/3_鱼书/app/web/book.py
 Description: 
     Blueprint 蓝图的作用是在大型项目中分拆模块的，而不是简单拆文件
@@ -66,8 +66,9 @@ def seek():
         # return jsonify(books.dict())   # 调用的事__dict__方法,会把对象所有的属性都返回,如果里面有一个object（列表）则还是不能返回，需要调用这个object的__dict__方法
         return json.dumps(books,default=lambda x:x.__dict__)
     else:
-        return jsonify(form.errors)
-
+        pass
+        #  return jsonify(form.errors)
+    return render_template('search_result.html',form=form)
 # @web.route('/test')
 # def hello_world():
 #     current_app.logger.info("测试日志")
