@@ -1,0 +1,548 @@
+{
+  "count": 20,
+  "items": [
+    {
+      "type_name": "豆列",
+      "layout": "doulist_cards",
+      "target": {
+        "doulists": [
+          {
+            "title": "豆瓣2022评分最高纪录剧集",
+            "is_badge_chart": false,
+            "uri": "douban://douban.com/subject_collection/ECR455GTQ?type=rank&category=movie&rank_type=year",
+            "cover_url": "https://qnmob3.doubanio.com/dae/screenshot/image/v2/html/cos_6468063429100f98/profile/chart_cover_url?imageView2/0/q/80/w/9999/h/120/format/jpg",
+            "target_type": "ranklist",
+            "card_subtitle": "4152人关注",
+            "is_official": false,
+            "id": "ECR455GTQ",
+            "image_label": "片单"
+          },
+          {
+            "title": "阎连科代表作",
+            "is_badge_chart": false,
+            "uri": "douban://douban.com/subject_collection/ECNANY6CY?type=rank&category=book&rank_type=author_book",
+            "cover_url": "https://qnmob3.doubanio.com/dae/merged_cover/img_handler/chart_cover/round_rec/ECNANY6CY-20210108111524_2024-09-30?imageView2/0/q/80/w/9999/h/120/format/jpg",
+            "target_type": "collection",
+            "card_subtitle": "703人关注",
+            "is_official": true,
+            "id": "ECNANY6CY",
+            "image_label": "书单"
+          },
+          {
+            "title": "2019年度中国文学(非小说)",
+            "is_badge_chart": false,
+            "uri": "douban://douban.com/subject_collection/ECOEHSYWI?type=rank&category=book&rank_type=year",
+            "cover_url": "https://qnmob3.doubanio.com/dae/screenshot/image/v2/html/cos_f6fc61eb72716f40/profile/chart_cover_url?imageView2/0/q/80/w/9999/h/120/format/jpg",
+            "target_type": "ranklist",
+            "card_subtitle": "1542人关注",
+            "is_official": false,
+            "id": "ECOEHSYWI",
+            "image_label": "书单"
+          },
+          {
+            "title": "新经典文库·巴学园",
+            "is_badge_chart": false,
+            "uri": "douban://douban.com/subject_collection/ECFYHZT5Q?type=rank&category=book&rank_type=series_book",
+            "cover_url": "https://qnmob3.doubanio.com/dae/merged_cover/img_handler/chart_cover/round_rec/ECFYHZT5Q-20210108111452_2024-09-30?imageView2/0/q/80/w/9999/h/120/format/jpg",
+            "target_type": "collection",
+            "card_subtitle": "848人关注",
+            "is_official": true,
+            "id": "ECFYHZT5Q",
+            "image_label": "书单"
+          },
+          {
+            "title": "豆瓣热门摄影集TOP10",
+            "is_badge_chart": false,
+            "uri": "douban://douban.com/subject_collection/ECO45Q27A?type=rank&category=book&rank_type=topn_book",
+            "cover_url": "https://qnmob3.doubanio.com/dae/merged_cover/img_handler/chart_cover/round_rec/ECO45Q27A-20201126182258_2024-09-30?imageView2/0/q/80/w/9999/h/120/format/jpg",
+            "target_type": "ranklist",
+            "card_subtitle": "4543人关注",
+            "is_official": false,
+            "id": "ECO45Q27A",
+            "image_label": "书单"
+          },
+          {
+            "title": "文化生活译丛",
+            "is_badge_chart": false,
+            "uri": "douban://douban.com/subject_collection/ECJAH666I?type=rank&category=book&rank_type=series_book",
+            "cover_url": "https://qnmob3.doubanio.com/dae/merged_cover/img_handler/chart_cover/round_rec/ECJAH666I-20210108111452_2024-09-30?imageView2/0/q/80/w/9999/h/120/format/jpg",
+            "target_type": "collection",
+            "card_subtitle": "1731人关注",
+            "is_official": true,
+            "id": "ECJAH666I",
+            "image_label": "书单"
+          }
+        ]
+      },
+      "target_type": "doulist_cards"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "5910656",
+      "target": {
+        "rating": {
+          "count": 63426,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 9.3
+        },
+        "controversy_reason": "",
+        "title": "我与地坛",
+        "abstract": "",
+        "uri": "douban://douban.com/book/5910656",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s4594868.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": true,
+        "card_subtitle": "史铁生 / 2011 / 人民文学出版社",
+        "id": "5910656",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "6079389",
+      "target": {
+        "rating": {
+          "count": 18210,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 9.2
+        },
+        "controversy_reason": "",
+        "title": "我与地坛",
+        "abstract": "",
+        "uri": "douban://douban.com/book/6079389",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s6313029.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": false,
+        "card_subtitle": "史铁生 / 2008 / 人民文学出版社",
+        "id": "6079389",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "30404939",
+      "target": {
+        "rating": {
+          "count": 4178,
+          "max": 10,
+          "star_count": 4,
+          "value": 8.4
+        },
+        "controversy_reason": "",
+        "title": "我与父辈",
+        "abstract": "",
+        "uri": "douban://douban.com/book/30404939",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s29966115.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": true,
+        "card_subtitle": "阎连科 / 2019 / 河南文艺出版社",
+        "id": "30404939",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "30207170",
+      "target": {
+        "rating": {
+          "count": 7851,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 9.2
+        },
+        "controversy_reason": "",
+        "title": "我与地坛",
+        "abstract": "",
+        "uri": "douban://douban.com/book/30207170",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s34274221.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": true,
+        "card_subtitle": "史铁生 / 2018 / 人民文学出版社",
+        "id": "30207170",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "电影",
+      "target_id": "26649221",
+      "target": {
+        "rating": {
+          "count": 2515,
+          "max": 10,
+          "star_count": 4,
+          "value": 7.7
+        },
+        "controversy_reason": "",
+        "title": "我与塞尚",
+        "abstract": "",
+        "has_linewatch": false,
+        "uri": "douban://douban.com/movie/26649221",
+        "cover_url": "https://qnmob3.doubanio.com/view/photo/s_ratio_poster/public/p2521535123.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "year": "2016",
+        "card_subtitle": "比利时 法国 / 剧情 传记 / 达妮埃尔·汤普森 / 吉约姆·卡内 圭洛姆·加里尼",
+        "id": "26649221",
+        "null_rating_reason": ""
+      },
+      "target_type": "movie"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "1051659",
+      "target": {
+        "rating": {
+          "count": 1198,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 8.8
+        },
+        "controversy_reason": "",
+        "title": "我与你",
+        "abstract": "",
+        "uri": "douban://douban.com/book/1051659",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s1255860.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": false,
+        "card_subtitle": "[德] 马丁·布伯 / 2002 / 生活·读书·新知三联书店",
+        "id": "1051659",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "1209899",
+      "target": {
+        "rating": {
+          "count": 113116,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 9.2
+        },
+        "controversy_reason": "",
+        "title": "我与地坛",
+        "abstract": "史铁生代表作",
+        "uri": "douban://douban.com/book/1209899",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s1151479.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": false,
+        "card_subtitle": "史铁生 / 2002 / 春风文艺出版社",
+        "id": "1209899",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "电影",
+      "target_id": "5151939",
+      "target": {
+        "rating": {
+          "count": 35691,
+          "max": 10,
+          "star_count": 3.5,
+          "value": 7.2
+        },
+        "controversy_reason": "",
+        "title": "我与梦露的一周",
+        "abstract": "",
+        "has_linewatch": false,
+        "uri": "douban://douban.com/movie/5151939",
+        "cover_url": "https://qnmob3.doubanio.com/view/photo/s_ratio_poster/public/p1346149420.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "year": "2011",
+        "card_subtitle": "英国 美国 / 剧情 传记 / 西蒙·柯蒂斯 / 米歇尔·威廉姆斯 埃迪·雷德梅恩",
+        "id": "5151939",
+        "null_rating_reason": ""
+      },
+      "target_type": "movie"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "6797700",
+      "target": {
+        "rating": {
+          "count": 2450,
+          "max": 10,
+          "star_count": 4,
+          "value": 8.2
+        },
+        "controversy_reason": "",
+        "title": "自我与本我",
+        "abstract": "",
+        "uri": "douban://douban.com/book/6797700",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s27267781.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": true,
+        "card_subtitle": "[奥]西格蒙德·弗洛伊德 / 2011 / 上海译文出版社",
+        "id": "6797700",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "电影",
+      "target_id": "3263820",
+      "target": {
+        "rating": {
+          "count": 47892,
+          "max": 10,
+          "star_count": 4,
+          "value": 7.7
+        },
+        "controversy_reason": "",
+        "title": "抗癌的我",
+        "abstract": "",
+        "has_linewatch": false,
+        "uri": "douban://douban.com/movie/3263820",
+        "cover_url": "https://qnmob3.doubanio.com/view/photo/s_ratio_poster/public/p1114406235.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "year": "2011",
+        "card_subtitle": "美国 / 剧情 喜剧 / 乔纳森·莱文 / 约瑟夫·高登-莱维特 塞斯·罗根",
+        "id": "3263820",
+        "null_rating_reason": ""
+      },
+      "target_type": "movie"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "26287236",
+      "target": {
+        "rating": {
+          "count": 356,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 8.7
+        },
+        "controversy_reason": "",
+        "title": "我与地坛",
+        "abstract": "",
+        "uri": "douban://douban.com/book/26287236",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s27969652.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": false,
+        "card_subtitle": "史铁生 / 2014 / 学苑出版社",
+        "id": "26287236",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "26932218",
+      "target": {
+        "rating": {
+          "count": 3973,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 9.1
+        },
+        "controversy_reason": "",
+        "title": "我与地坛",
+        "abstract": "",
+        "uri": "douban://douban.com/book/26932218",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s29778139.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": true,
+        "card_subtitle": "史铁生 / 2016 / 湖南文艺出版社",
+        "id": "26932218",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "1394089",
+      "target": {
+        "rating": {
+          "count": 78,
+          "max": 10,
+          "star_count": 4,
+          "value": 7.9
+        },
+        "controversy_reason": "",
+        "title": "少女的心",
+        "abstract": "我与萨特",
+        "uri": "douban://douban.com/book/1394089",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s1738341.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": false,
+        "card_subtitle": "[法] 波伏娃 / 1988年12月 / 湖南人民出版社",
+        "id": "1394089",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "35380288",
+      "target": {
+        "rating": {
+          "count": 1009,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 8.5
+        },
+        "controversy_reason": "",
+        "title": "我与父辈",
+        "abstract": "",
+        "uri": "douban://douban.com/book/35380288",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s33841258.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": false,
+        "card_subtitle": "阎连科 / 2021 / 江苏凤凰文艺出版社",
+        "id": "35380288",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "36954762",
+      "target": {
+        "rating": {
+          "count": 197,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 9
+        },
+        "controversy_reason": "",
+        "title": "自我",
+        "abstract": "与齐格蒙特·鲍曼对谈",
+        "uri": "douban://douban.com/book/36954762",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s34924055.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": false,
+        "card_subtitle": "[英国] 齐格蒙特·鲍曼 [爱沙尼亚] 瑞恩·罗德 [英国] 齐格蒙·鲍曼 / 2024 / 南京大学出版社",
+        "id": "36954762",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "电视剧",
+      "target_id": "36109006",
+      "target": {
+        "rating": {
+          "count": 11997,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 9
+        },
+        "controversy_reason": "",
+        "title": "不止考古·我与三星堆",
+        "abstract": "",
+        "has_linewatch": true,
+        "uri": "douban://douban.com/tv/36109006",
+        "cover_url": "https://qnmob3.doubanio.com/view/photo/s_ratio_poster/public/p2881138847.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "year": "2022",
+        "card_subtitle": "中国大陆 / 纪录片 历史 / 范承祥 顾菡丹 / 叶清 赵昊",
+        "id": "36109006",
+        "null_rating_reason": ""
+      },
+      "target_type": "tv"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "3270617",
+      "target": {
+        "rating": {
+          "count": 4401,
+          "max": 10,
+          "star_count": 4.5,
+          "value": 9.3
+        },
+        "controversy_reason": "",
+        "title": "我与地坛",
+        "abstract": "",
+        "uri": "douban://douban.com/book/3270617",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s3444032.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": false,
+        "card_subtitle": "史铁生 / 2008 / 人民文学出版社",
+        "id": "3270617",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    },
+    {
+      "layout": "subject",
+      "type_name": "电视剧",
+      "target_id": "26864181",
+      "target": {
+        "rating": {
+          "count": 13555,
+          "max": 10,
+          "star_count": 2.5,
+          "value": 4.6
+        },
+        "controversy_reason": "",
+        "title": "我与你的光年距离",
+        "abstract": "",
+        "has_linewatch": true,
+        "uri": "douban://douban.com/tv/26864181",
+        "cover_url": "https://qnmob3.doubanio.com/view/photo/s_ratio_poster/public/p2444208043.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "year": "2017",
+        "card_subtitle": "中国大陆 / 爱情 奇幻 / 猫的树 / 宋威龙 周雨彤",
+        "id": "26864181",
+        "null_rating_reason": ""
+      },
+      "target_type": "tv"
+    },
+    {
+      "layout": "subject",
+      "type_name": "电影",
+      "target_id": "1304857",
+      "target": {
+        "rating": {
+          "count": 3439,
+          "max": 10,
+          "star_count": 4,
+          "value": 7.7
+        },
+        "controversy_reason": "",
+        "title": "我与长指甲",
+        "abstract": "",
+        "has_linewatch": false,
+        "uri": "douban://douban.com/movie/1304857",
+        "cover_url": "https://qnmob3.doubanio.com/view/photo/s_ratio_poster/public/p2204681339.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "year": "1987",
+        "card_subtitle": "英国 / 剧情 喜剧 / 布鲁斯·罗宾逊 / 理查德·E·格兰特 保罗·麦甘恩",
+        "id": "1304857",
+        "null_rating_reason": ""
+      },
+      "target_type": "movie"
+    },
+    {
+      "layout": "subject",
+      "type_name": "图书",
+      "target_id": "6314051",
+      "target": {
+        "rating": {
+          "count": 524,
+          "max": 10,
+          "star_count": 4,
+          "value": 8.2
+        },
+        "controversy_reason": "",
+        "title": "我与八十年代",
+        "abstract": "",
+        "uri": "douban://douban.com/book/6314051",
+        "cover_url": "https://qnmob3.doubanio.com/view/subject/m/public/s6567185.jpg?imageView2/0/q/80/w/9999/h/120/format/jpg",
+        "has_ebook": false,
+        "card_subtitle": "马国川 / 2011 / 生活·读书·新知三联书店",
+        "id": "6314051",
+        "null_rating_reason": ""
+      },
+      "target_type": "book"
+    }
+  ],
+  "total": 1618,
+  "start": 0
+}

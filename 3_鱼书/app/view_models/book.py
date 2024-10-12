@@ -2,14 +2,16 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-08 21:55:17
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-10 16:16:01
+LastEditTime: 2024-10-12 15:54:27
 FilePath: /learnFlask/3_鱼书/app/view_models/book.py
 Description: 
 
 Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
 '''
-
-
+from bs4 import BeautifulSoup
+import requests
+import re
+from app.spider.yushu_book import YuShuBook
 class BookViewModel_old:
     # 不管是单本还是多本，都返回同样的数据类型
     def package_single(self,keyword,data):
@@ -64,14 +66,14 @@ class BookViewModel_single:
     集合就是把多本书分别交给单本来处理
 
     '''
-    def __init__(self,yushu_book):
-            self.title = yushu_book.data['title'],
-            self.publisher = yushu_book.data['publisher'],
-            self.pages = yushu_book.data['pages'] or '',
-            self.author = '、'.join(yushu_book.data['author']),
-            self.price = yushu_book.data['price'] or '',
-            self.summary = yushu_book.data['summary'] or '',
-            self.image = yushu_book.data['image']
+    def __init__(self,response):
+        self.title = response['title']+response['book_subtitle'] or ''
+        self.publisher = '、'.join(response['press'])
+        self.pages = response['pages'] or ''
+        self.author = '、'.join(response['author'])
+        self.price = response['price'] or ''
+        self.summary = response['intro'].replace('\n','') or ''
+        self.image = response['pic']['normal']
     
 
 
@@ -83,7 +85,61 @@ class BookViewModel_collection:
 
     def fill(self,yushu_book):
         self.total = yushu_book.total
+        # print(yushu_book.keyword)
         self.keyword = yushu_book.keyword
-        self.books = [BookViewModel_single(book) for book in yushu_book.books]
+        if self.total ==1 :            
+            self.books.append(BookViewModel_single(yushu_book.books))
+        else:
+            self.__process_multibooks(yushu_book.books)
+            
+    def __process_multibooks(self,books):
+        #print(books)
 
+        for item in books['items']:
+            print(item)
+            if item['type_name'] == '图书':
+                uri_raw = item['target']['uri']
+                print(uri_raw)
+                uri = re.findall(r'book/(\d+)',uri_raw)[0]
+                url = f'https://book.douban.com/subject/{uri}/'
+                print(url)
+                isbn = self.__get_isbn(self.__get_http(url))
+                print(isbn)
+                if isbn:
+                    yushubook = YuShuBook()
+                    yushubook.search_by_isbn(isbn)
+                    self.books.append(BookViewModel_single(yushubook.books))
+                    self.total += 1
+
+
+
+
+
+    def __get_isbn(self,response):
+        source = response.content.decode('utf-8')
+        soup = BeautifulSoup(source,'html.parser')
+        # with open('antusheng.txt','w',encoding='utf-8') as f:
+        #     f.write(soup.prettify())
+        #查找isbn
+        isbn_block = soup.find('div',id='info')
+        # print("++++++++++++++++isbn_block++++++++++++++++++++")
+        # print(isbn_block)
+        isbn = isbn_block.find('span',class_='pl',string='ISBN:').next_sibling.strip()
+        if isbn:
+            print(f'ISBN: {isbn}')
+            return isbn
+
+        else:
+            print('未找到 ISBN')
+            return 'None'
+        
+    def __get_http(self,url):
+        headers = {
+            'User-Agent':'Apifox/1.0.0 (https://apifox.com)',
+        }
+        r = requests.get(url,headers=headers,verify=False)
+
+        print(r.status_code)
+        return r
+        
         

@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 17:13:43
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-11 19:13:33
+LastEditTime: 2024-10-12 13:07:40
 FilePath: /learnFlask/3_鱼书/app/web/book.py
 Description: 
     Blueprint 蓝图的作用是在大型项目中分拆模块的，而不是简单拆文件
@@ -15,7 +15,7 @@ from flask import jsonify
 from flask import request as flask_request
 from flask import current_app
 from app.forms.book import SearchForm
-from app.view_models.book import BookViewModel,BookViewModel_collection
+from app.view_models.book import BookViewModel_single,BookViewModel_collection
 import json
 from flask import render_template
 from flask import flash
@@ -43,8 +43,8 @@ from . import web
 @web.route('/book/search')
 def search():
     """
-    seek?q=地坛
-    seek?q=9787501524044
+    search?q=地坛
+    search?q=9787501524044
     """
 
     # wtform验证层    
@@ -52,20 +52,22 @@ def search():
     books = BookViewModel_collection()
     if form.validate():
         # 从form里取参数，可以使默认参数生效
-        q = form.q.data.strip()
+        q = form.q.data.strip() #获取搜索关键字
         current_app.logger.info('q: %s' % q)
         isbn_or_key = is_isbn_or_key(q)
 
         yushubook = YuShuBook()
         
         if isbn_or_key == 'isbn':
+            print("++++++++search by isbn++++++++")
             yushubook.search_by_isbn(q)
         else:
             yushubook.search_by_keyword(q)
-        books.fill(yushubook,q)
+        books.fill(yushubook)
         # return jsonify(books.dict())   # 调用的事__dict__方法,会把对象所有的属性都返回,如果里面有一个object（列表）则还是不能返回，需要调用这个object的__dict__方法
-        return json.dumps(books,default=lambda x:x.__dict__)
+        return json.dumps(books,default=lambda x:x.__dict__,ensure_ascii=False) # ensure_ascii=False 参数，以确保中文字符不会被转义为 Unicode 编码。这样可以保留中文字符的原始形式。
     else:
+
         print("hello")
         return jsonify(form.errors)
         # return render_template('search_result.html',form=form)

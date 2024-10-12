@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 16:32:39
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-08 15:12:43
+LastEditTime: 2024-10-12 14:17:28
 FilePath: /learnFlask/3_鱼书/app/libs/myHttp.py
 Description: 
 
@@ -21,7 +21,7 @@ class HTTP:
         # 代码大全建议说一个函数只有一个return，但是不同的return代表着不同的思维的分支，
         # 到了分支的终点就应该直接退出函数，
         # 如果强行使用一个return，可能会多出太多的if-else判断，导致代码复杂    
-        r = requests.get(url,headers=headers,params=params,verify=False)
+        r = requests.get(url,headers=headers,params=params)
         if r.status_code != 200:
             return {'豆瓣接口 status_code': r.status_code} if return_json else f'Status Code: {r.status_code}'
         return r.json() if return_json else r.text

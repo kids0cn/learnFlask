@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 16:53:12
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-10 16:04:57
+LastEditTime: 2024-10-12 15:41:09
 FilePath: /learnFlask/3_鱼书/app/spider/yushu_book.py
 Description: 
 
@@ -69,10 +69,11 @@ class YuShuBook_old:
         result = HTTP.get(cls.douban_keyword_api,return_json=True,params=params,headers=headers)
         return result
 
-class YushuBook:
+class YuShuBook:
     # 这个类之所以是伪类是因为把所有的方法数据都返回给了别人，自己没有存储数据
     def __init__(self):
         self.total = 0;
+        self.keyword = ''
         self.books = []
 
     # isbn_url = 'http://t.yushu.im/v2/book/isbn/{}'
@@ -109,7 +110,8 @@ class YushuBook:
                 return None
 
         '''
-        self.__fill_single(result)
+
+        self.__fill_single(result,isbn)
     
     
     def search_by_keyword(self,q):
@@ -127,14 +129,16 @@ class YushuBook:
         }
         
         result = HTTP.get(self.douban_keyword_api,return_json=True,params=params,headers=headers)
-        self.__fill_collection(result)
+        self.__fill_collection(result,q)
     
-    def __fill_single(self,data):
+    def __fill_single(self,data,q):
         if data:
             self.total = 1
-            self.books.append(data)
+            self.books = data
+            self.keyword = q
 
-    def __fill_collection(self,data):
+    def __fill_collection(self,data,q):
         if data:
-            self.total = data['total']
-            self.books = data['books']
+            self.total = 0
+            self.books = data
+            self.keyword = q
