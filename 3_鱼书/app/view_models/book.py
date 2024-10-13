@@ -147,35 +147,35 @@ class BookViewModel_collection:
 
 
     def __get_isbn(self,response):
-        source = response.content.decode('utf-8')
-        soup = BeautifulSoup(source,'html.parser')
-        # with open('antusheng.txt','w',encoding='utf-8') as f:
-        #     f.write(soup.prettify())
-        #查找isbn
-        isbn_block = soup.find('script',type='application/ld+json').string
-        # print("++++++++++++++++isbn_block++++++++++++++++++++")
-        # print(isbn_block)
-        #isbn = isbn_block.find('span',class_='pl',string='ISBN:').next_sibling.strip()
-        isbn_json = json.loads(isbn_block)
+        if response.status_code == 200:
+            source = response.content.decode('utf-8')
+            soup = BeautifulSoup(source,'html.parser')
+            # with open('antusheng.txt','w',encoding='utf-8') as f:
+            #     f.write(soup.prettify())
+            #查找isbn
+            isbn_block = soup.find('script',type='application/ld+json').string
+            # print("++++++++++++++++isbn_block++++++++++++++++++++")
+            # print(isbn_block)
+            #isbn = isbn_block.find('span',class_='pl',string='ISBN:').next_sibling.strip()
+            isbn_json = json.loads(isbn_block)
 
 
-        isbn = isbn_json.get('isbn','None')
+            isbn = isbn_json.get('isbn','None')
 
-        if isbn:
-            #print(f'ISBN: {isbn}')
-            return isbn
+            if isbn:
+                #print(f'ISBN: {isbn}')
+                return isbn
 
-        else:
-            print('未找到 ISBN')
-            return 'None'
+            else:
+                print('未找到 ISBN')
+                return 'None'
         
     def __get_http(self,session,url):
         headers = {
             'User-Agent':'Apifox/1.0.0 (https://apifox.com)',
         }
-        r = session.get(url,headers=headers)
+        r = session.get(url,headers=headers,verify=False)
 
-        print(r.status_code)
         return r
     
     def __get_book_detail(self,session,url):

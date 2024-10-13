@@ -13,7 +13,6 @@ import requests
 from flask import current_app
 requests.packages.urllib3.disable_warnings()
 
-
 proxy = {
     'http':'http://192.168.1.16:7890',
     'https':'http://192.168.1.16:7893',
