@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-08 21:55:17
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-12 15:54:27
+LastEditTime: 2024-10-13 15:12:50
 FilePath: /learnFlask/3_鱼书/app/view_models/book.py
 Description: 
 
@@ -12,6 +12,17 @@ from bs4 import BeautifulSoup
 import requests
 import re
 from app.spider.yushu_book import YuShuBook
+import concurrent.futures
+import json
+
+
+
+proxy = {
+    'http':'http://192.168.1.16:7893',
+    'https':'http://192.168.1.16:7893',
+}
+
+
 class BookViewModel_old:
     # 不管是单本还是多本，都返回同样的数据类型
     def package_single(self,keyword,data):
@@ -67,13 +78,19 @@ class BookViewModel_single:
 
     '''
     def __init__(self,response):
-        self.title = response['title']+response['book_subtitle'] or ''
-        self.publisher = '、'.join(response['press'])
-        self.pages = response['pages'] or ''
-        self.author = '、'.join(response['author'])
-        self.price = response['price'] or ''
-        self.summary = response['intro'].replace('\n','') or ''
-        self.image = response['pic']['normal']
+        # with open('response.txt','a',encoding='utf-8') as f:
+        #     f.write(str(response))
+        #     f.write('++\n')
+        if response:
+            self.title = response.get('title','Null title')+response.get('book_subtitle','')
+            self.publisher = '、'.join(response['press'])
+            self.pages = response['pages'] or ''
+            self.author = '、'.join(response['author'])
+            self.price = response['price'] or ''
+            self.summary = response['intro'].replace('\n','') or ''
+            self.image = response['pic']['normal']
+        else:
+            self.title = 'Null title'
     
 
 
@@ -94,25 +111,36 @@ class BookViewModel_collection:
             
     def __process_multibooks(self,books):
         #print(books)
-
+        url_list = []
         for item in books['items']:
-            print(item)
             if item['type_name'] == '图书':
                 uri_raw = item['target']['uri']
-                print(uri_raw)
+                #print(uri_raw)
                 uri = re.findall(r'book/(\d+)',uri_raw)[0]
                 url = f'https://book.douban.com/subject/{uri}/'
-                print(url)
-                isbn = self.__get_isbn(self.__get_http(url))
-                print(isbn)
-                if isbn:
-                    yushubook = YuShuBook()
-                    yushubook.search_by_isbn(isbn)
-                    self.books.append(BookViewModel_single(yushubook.books))
-                    self.total += 1
+                #print(url)
+                url_list.append(url)
+        self.total = len(url_list)
+        # print("++++++++++++++++url_list++++++++++++++++++++")
+        # print(url_list)
+        # print("++++++++++++++++url_list++++++++++++++++++++")
+        self.__process_isbn_list(url_list)
+                # isbn = self.__get_isbn(self.__get_http(url))
+                # print(isbn)
+                # if isbn:
+                #     # yushubook = YuShuBook()
+                #     #yushubook.search_by_isbn(isbn)
+                #     self.books.append(BookViewModel_single(yushubook.books))
+                #     self.total += 1
 
 
 
+
+    def __process_isbn_list(self,url_list):
+        # return books 列表直接把self.books填充
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            result = list(executor.map(self.__get_book_detail,url_list))
+            self.books = result
 
 
     def __get_isbn(self,response):
@@ -121,12 +149,17 @@ class BookViewModel_collection:
         # with open('antusheng.txt','w',encoding='utf-8') as f:
         #     f.write(soup.prettify())
         #查找isbn
-        isbn_block = soup.find('div',id='info')
+        isbn_block = soup.find('script',type='application/ld+json').string
         # print("++++++++++++++++isbn_block++++++++++++++++++++")
         # print(isbn_block)
-        isbn = isbn_block.find('span',class_='pl',string='ISBN:').next_sibling.strip()
+        #isbn = isbn_block.find('span',class_='pl',string='ISBN:').next_sibling.strip()
+        isbn_json = json.loads(isbn_block)
+
+
+        isbn = isbn_json.get('isbn','None')
+
         if isbn:
-            print(f'ISBN: {isbn}')
+            #print(f'ISBN: {isbn}')
             return isbn
 
         else:
@@ -137,9 +170,16 @@ class BookViewModel_collection:
         headers = {
             'User-Agent':'Apifox/1.0.0 (https://apifox.com)',
         }
-        r = requests.get(url,headers=headers,verify=False)
+        r = requests.get(url,headers=headers,proxies=proxy)
 
         print(r.status_code)
         return r
-        
-        
+    
+    def __get_book_detail(self,url):
+        # 输入：books的真实地址
+        # 输出：self.book的内容
+        isbn = self.__get_isbn(self.__get_http(url))
+        if isbn:
+            yushubook = YuShuBook()
+            yushubook.search_by_isbn(isbn)
+            return BookViewModel_single(yushubook.books)
