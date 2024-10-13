@@ -11,7 +11,7 @@ Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
 
 from app.libs.myHttp import HTTP
 from flask import current_app
-
+import requests
 class YuShuBook_old:
     # isbn_url = 'http://t.yushu.im/v2/book/isbn/{}'
     # keyword_url = 'http://t.yushu.im/v2/book/search?q={}&count={}&start={}'
@@ -72,9 +72,10 @@ class YuShuBook_old:
 class YuShuBook:
     # 这个类之所以是伪类是因为把所有的方法数据都返回给了别人，自己没有存储数据
     def __init__(self):
-        self.total = 0;
+        self.total = 0
         self.keyword = ''
         self.books = []
+        self.session = requests.Session()
 
     # isbn_url = 'http://t.yushu.im/v2/book/isbn/{}'
     # keyword_url = 'http://t.yushu.im/v2/book/search?q={}&count={}&start={}'
@@ -92,7 +93,7 @@ class YuShuBook:
             'apiKey':self.api_key,
         }
         # current_app.logger.info(url)    
-        result = HTTP.get(self.douban_isbn_api+isbn,return_json=True,params=params,headers=headers)
+        result = HTTP.get(self.session,self.douban_isbn_api+isbn,return_json=True,params=params,headers=headers)
         '''
         # 先从数据库查一下isbn，有的话直接返回
         # 没有的话，调用豆瓣api
@@ -128,7 +129,7 @@ class YuShuBook:
             'apiKey':self.api_key,
         }
         
-        result = HTTP.get(self.douban_keyword_api,return_json=True,params=params,headers=headers)
+        result = HTTP.get(self.session,self.douban_keyword_api,return_json=True,params=params,headers=headers)
         self.__fill_collection(result,q)
     
     def __fill_single(self,data,q):

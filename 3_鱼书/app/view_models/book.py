@@ -83,6 +83,9 @@ class BookViewModel_single:
         #     f.write(str(response))
         #     f.write('++\n')
         if response:
+            # print("++++++++++++++++response++++++++++++++++++++")
+            # print('在这里 在这里')
+            # print("++++++++++++++++response++++++++++++++++++++")
             self.title = response.get('title','Null title')+response.get('book_subtitle','')
             self.publisher = '、'.join(response['press'])
             self.pages = response['pages'] or ''
@@ -90,6 +93,9 @@ class BookViewModel_single:
             self.price = response['price'] or ''
             self.summary = response['intro'].replace('\n','') or ''
             self.image = response['pic']['normal']
+            # print("++++++++++++++++self++++++++++++++++++++")
+            # print(self.)
+            # print("++++++++++++++++self++++++++++++++++++++")
         else:
             self.title = 'Null title'
     
@@ -105,12 +111,13 @@ class BookViewModel_collection:
         self.total = yushu_book.total
         # print(yushu_book.keyword)
         self.keyword = yushu_book.keyword
-        if self.total ==1 :            
+        if self.total ==1 :      
+            #print("在这里 在这里 total==1")      
             self.books.append(BookViewModel_single(yushu_book.books))
         else:
-            self.__process_multibooks(yushu_book.books)
+            self.__process_multibooks(yushu_book.session,yushu_book.books)
             
-    def __process_multibooks(self,books):
+    def __process_multibooks(self,session,books):
         #print(books)
         url_list = []
         for item in books['items']:
@@ -125,7 +132,7 @@ class BookViewModel_collection:
         # print("++++++++++++++++url_list++++++++++++++++++++")
         # print(url_list)
         # print("++++++++++++++++url_list++++++++++++++++++++")
-        self.__process_isbn_list(url_list)
+        self.__process_isbn_list(session,url_list)
                 # isbn = self.__get_isbn(self.__get_http(url))
                 # print(isbn)
                 # if isbn:
@@ -137,13 +144,12 @@ class BookViewModel_collection:
 
 
 
-    def __process_isbn_list(self,url_list):
+    def __process_isbn_list(self,session,url_list):
         # return books 列表直接把self.books填充
-        with requests.Session() as session: # 创建session对象
-            with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
-                # 使用session发送请求
-                result = list(executor.map(lambda url: self.__get_book_detail(session,url),url_list))
-                self.books = result
+        with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
+            # 使用session发送请求
+            result = list(executor.map(lambda url: self.__get_book_detail(session,url),url_list))
+            self.books = result
 
 
     def __get_isbn(self,response):

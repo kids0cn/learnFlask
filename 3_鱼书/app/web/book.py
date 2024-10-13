@@ -20,7 +20,7 @@ import json
 from flask import render_template
 from flask import flash
 from . import web
-
+import requests
 # @web.route('/book/search/<q>')
 # def search(q):
 #     # r = flask_request.args.to_dict()
@@ -55,15 +55,19 @@ def search():
         q = form.q.data.strip() #获取搜索关键字
         current_app.logger.info('q: %s' % q)
         isbn_or_key = is_isbn_or_key(q)
-
         yushubook = YuShuBook()
-        
+            
         if isbn_or_key == 'isbn':
             print("++++++++search by isbn++++++++")
             yushubook.search_by_isbn(q)
         else:
             yushubook.search_by_keyword(q)
+        # print("++++++++++++++++++++++++++++++++++++")
+        # print(yushubook.books)
+        # print("++++++++++++++++++++++++++++++++++++")
         books.fill(yushubook)
+        # print("++++++++++++++++++++++++++++++++++++")
+        # print(books)
         # return jsonify(books.dict())   # 调用的事__dict__方法,会把对象所有的属性都返回,如果里面有一个object（列表）则还是不能返回，需要调用这个object的__dict__方法
         return json.dumps(books,default=lambda x:x.__dict__,ensure_ascii=False) # ensure_ascii=False 参数，以确保中文字符不会被转义为 Unicode 编码。这样可以保留中文字符的原始形式。
     else:
