@@ -11,6 +11,8 @@ Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
 
 import requests
 from flask import current_app
+requests.packages.urllib3.disable_warnings()
+
 
 proxy = {
     'http':'http://192.168.1.16:7890',
@@ -26,7 +28,7 @@ class HTTP:
         # 代码大全建议说一个函数只有一个return，但是不同的return代表着不同的思维的分支，
         # 到了分支的终点就应该直接退出函数，
         # 如果强行使用一个return，可能会多出太多的if-else判断，导致代码复杂    
-        r = requests.get(url,headers=headers,params=params,proxies=proxy)
+        r = requests.get(url,headers=headers,params=params,verify=False)
         if r.status_code != 200:
             #return {'豆瓣接口 status_code': r.status_code} if return_json else f'Status Code: {r.status_code}'
             return None

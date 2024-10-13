@@ -10,6 +10,7 @@ Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
 '''
 from bs4 import BeautifulSoup
 import requests
+requests.packages.urllib3.disable_warnings()
 import re
 from app.spider.yushu_book import YuShuBook
 import concurrent.futures
@@ -138,9 +139,11 @@ class BookViewModel_collection:
 
     def __process_isbn_list(self,url_list):
         # return books 列表直接把self.books填充
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-            result = list(executor.map(self.__get_book_detail,url_list))
-            self.books = result
+        with requests.Session() as session: # 创建session对象
+            with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
+                # 使用session发送请求
+                result = list(executor.map(lambda url: self.__get_book_detail(session,url),url_list))
+                self.books = result
 
 
     def __get_isbn(self,response):
@@ -166,19 +169,19 @@ class BookViewModel_collection:
             print('未找到 ISBN')
             return 'None'
         
-    def __get_http(self,url):
+    def __get_http(self,session,url):
         headers = {
             'User-Agent':'Apifox/1.0.0 (https://apifox.com)',
         }
-        r = requests.get(url,headers=headers,proxies=proxy)
+        r = session.get(url,headers=headers)
 
         print(r.status_code)
         return r
     
-    def __get_book_detail(self,url):
+    def __get_book_detail(self,session,url):
         # 输入：books的真实地址
         # 输出：self.book的内容
-        isbn = self.__get_isbn(self.__get_http(url))
+        isbn = self.__get_isbn(self.__get_http(session,url))
         if isbn:
             yushubook = YuShuBook()
             yushubook.search_by_isbn(isbn)
