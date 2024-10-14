@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 18:33:09
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-11 14:11:10
+LastEditTime: 2024-10-14 11:51:46
 FilePath: /learnFlask/3_鱼书/app/__init__.py
 Description: 
     初始化的工作应该放到__init__.py中，这样就可以在其他文件中导入app
@@ -22,6 +22,7 @@ from flask import Flask
 
 def create_app():
     app = Flask(__name__)
+    #app = Flask(__name__,template_folder='../templates',static_folder='../static')
     app.config.from_object('app.config_secure')
     app.config.from_object('app.config_setting')
     register_blueprint(app)
