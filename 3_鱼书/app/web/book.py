@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 17:13:43
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-14 13:26:14
+LastEditTime: 2024-10-14 16:36:05
 FilePath: /learnFlask/3_鱼书/app/web/book.py
 Description: 
     Blueprint 蓝图的作用是在大型项目中分拆模块的，而不是简单拆文件
@@ -63,12 +63,24 @@ def search():
                 yushubook.search_by_keyword(q,session)
             books.fill(yushubook,session)
             # return jsonify(books.dict())   # 调用的事__dict__方法,会把对象所有的属性都返回,如果里面有一个object（列表）则还是不能返回，需要调用这个object的__dict__方法
-            return json.dumps(books,default=lambda x:x.__dict__,ensure_ascii=False) # ensure_ascii=False 参数，以确保中文字符不会被转义为 Unicode 编码。这样可以保留中文字符的原始形式。
-    else:
+            #return json.dumps(books,default=lambda x:x.__dict__,ensure_ascii=False) # ensure_ascii=False 参数，以确保中文字符不会被转义为 Unicode 编码。这样可以保留中文字符的原始形式。
 
-        print("hello")
-        return jsonify(form.errors)
-        # return render_template('search_result.html',form=form)
+    else:
+        flash("搜索的关键词不符合要求，请重新输入",category = 'error')
+    return  render_template('search_result.html',books=books)
+
+
+
+@web.route('/book/<isbn>/detail')
+def book_detail(isbn):
+    # TODO：封装youshubook,BOOKVIEWMODEL添加self.isbn，否则前段调用不到isbn
+    with requests.session() as session:
+        yushubook = YuShuBook()
+        yushubook.search_by_isbn(isbn,session)
+        book = BookViewModel_single(yushubook.book)
+        return render_template('book_detail.html',book=book)
+
+
 
 
 

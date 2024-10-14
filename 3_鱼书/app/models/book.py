@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-02 19:58:43
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-08 21:38:44
+LastEditTime: 2024-10-14 16:43:11
 FilePath: /learnFlask/3_鱼书/app/models/book.py
 Description:
 
@@ -17,11 +17,10 @@ Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
 
 
 
+from app.models.base import db
 
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column,Integer,String
 
-db = SQLAlchemy()
 
 class Book(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True) # 

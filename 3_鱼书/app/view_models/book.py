@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-08 21:55:17
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-14 10:39:21
+LastEditTime: 2024-10-14 16:01:51
 FilePath: /learnFlask/3_鱼书/app/view_models/book.py
 Description: 
 
@@ -51,12 +51,35 @@ class BookViewModel_single:
             self.publisher = '、'.join(response['press'])
             self.pages = response['pages'] or ''
             self.author = '、'.join(response['author'])
-            self.price = response['price'] or ''
+            self.price = response['price'][0]
             self.summary = response['intro'].replace('\n','') or ''
-            self.image = response['pic']['normal']
+            self.image = response['pic']['large']
+            # with open('response.txt','a',encoding='utf-8') as f:
+            #     f.write(str(self.title))
+            #     f.write('\n')
+            #     f.write(str(self.publisher))
+            #     f.write('\n')
+            #     f.write(str(self.pages))
+            #     f.write('\n')
+            #     f.write(str(self.author))
+            #     f.write('\n')
+            #     f.write(str(self.price))
+            #     f.write('\n')
+            #     f.write(str(self.summary))
+            #     f.write('\n')
+            #     f.write(str(self.image))
+            #     f.write('\n')
         else:
             self.title = 'Null title'
     
+    @property
+    def intro(self):
+        intros = filter(lambda x:True if x else False,
+                        [self.author,self.publisher,self.price])
+        # print("+++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        # print(list(intros))
+        # print("+++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        return ' / '.join(intros)
 
 
 class BookViewModel_collection:

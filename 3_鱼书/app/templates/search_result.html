@@ -1,3 +1,13 @@
+<!--
+ * @Author: kids0cn kids0cn@gmail.com
+ * @Date: 2024-10-11 18:17:11
+ * @LastEditors: kids0cn kids0cn@gmail.com
+ * @LastEditTime: 2024-10-14 15:51:19
+ * @FilePath: /learnFlask/3_鱼书/app/templates/search_result.html
+ * @Description: 
+ * 
+ * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
+-->
 {% extends "base.html" %}
 {% block head %}
     {{ super() }}
@@ -24,7 +34,7 @@
                 </div>
                 <div class="col-md-7 flex-vertical description-font">
                     <span class="title">{{ book.title }}</span>
-{#                    <span>{{ [book.author | d(''), book.publisher | d('', true) , '￥' + book.price | d('')] | join(' / ') }}</span>#}
+{#                   {# <span>{{ [book.author | d(''), book.publisher | d('', true) , '￥' + book.price | d('')] | join(' / ') }}</span>#}
                     <span>{{book.intro}}</span>
                     <span class="summary">{{ book.summary | default('', true) }}</span>
                 </div>
