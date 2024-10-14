@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 17:13:43
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-14 10:37:34
+LastEditTime: 2024-10-14 13:26:14
 FilePath: /learnFlask/3_鱼书/app/web/book.py
 Description: 
     Blueprint 蓝图的作用是在大型项目中分拆模块的，而不是简单拆文件
