@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-08 21:55:17
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-13 15:12:50
+LastEditTime: 2024-10-14 10:39:21
 FilePath: /learnFlask/3_鱼书/app/view_models/book.py
 Description: 
 
@@ -24,43 +24,7 @@ proxy = {
 }
 
 
-class BookViewModel_old:
-    # 不管是单本还是多本，都返回同样的数据类型
-    def package_single(self,keyword,data):
-        returned = {
-            'keyword':keyword,
-            'book':[],
-            'total':0
-        }
-        if data:
-            returned['total'] = 1
-            returned['book'] = [self.cut_data(data)]
-        return returned
 
-    def package_collection(self,keyword,data):
-        returned = {
-            'keyword':keyword,
-            'book':[],
-            'total':0
-        }
-        if data:
-            returned['total'] = len(data['books'])
-            # 对单项数据进行处理，遇到多项的数据，就可以直接复用，这是一种编程思维
-            returned['book'] = [self.cut_data(book) for book in data['books']]
-        return returned
-    
-    def cut_data(self,data):
-        # 这里需要重写和测试
-        book =  {
-            'title':data['title'],
-            'publisher':data['publisher'],
-            'pages':data['pages'] or '',
-            'author': '、'.join(data['author']),
-            'price':data['price'] or '',
-            'summary':data['summary'] or '',
-            'image':data['image']
-        }
-        return book
 
 class BookViewModel_single:
     '''
@@ -101,16 +65,16 @@ class BookViewModel_collection:
         self.books = []
         self.keyword = ''
 
-    def fill(self,yushu_book):
+    def fill(self,yushu_book,session):
         self.total = yushu_book.total
         # print(yushu_book.keyword)
         self.keyword = yushu_book.keyword
         if self.total ==1 :            
             self.books.append(BookViewModel_single(yushu_book.books))
         else:
-            self.__process_multibooks(yushu_book.books)
-            
-    def __process_multibooks(self,books):
+            self.__process_multibooks(yushu_book.books,session)
+
+    def __process_multibooks(self,books,session):
         #print(books)
         url_list = []
         for item in books['items']:
@@ -125,7 +89,7 @@ class BookViewModel_collection:
         # print("++++++++++++++++url_list++++++++++++++++++++")
         # print(url_list)
         # print("++++++++++++++++url_list++++++++++++++++++++")
-        self.__process_isbn_list(url_list)
+        self.__process_isbn_list(url_list,session)
                 # isbn = self.__get_isbn(self.__get_http(url))
                 # print(isbn)
                 # if isbn:
@@ -137,13 +101,12 @@ class BookViewModel_collection:
 
 
 
-    def __process_isbn_list(self,url_list):
+    def __process_isbn_list(self,url_list,session):
         # return books 列表直接把self.books填充
-        with requests.Session() as session: # 创建session对象
-            with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
-                # 使用session发送请求
-                result = list(executor.map(lambda url: self.__get_book_detail(session,url),url_list))
-                self.books = result
+        with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
+            # 使用session发送请求
+            result = list(executor.map(lambda url: self.__get_book_detail(session,url),url_list))
+            self.books = result
 
 
     def __get_isbn(self,response):
@@ -184,5 +147,45 @@ class BookViewModel_collection:
         isbn = self.__get_isbn(self.__get_http(session,url))
         if isbn:
             yushubook = YuShuBook()
-            yushubook.search_by_isbn(isbn)
+            yushubook.search_by_isbn(isbn,session)
             return BookViewModel_single(yushubook.books)
+
+
+
+class BookViewModel_old:
+    # 不管是单本还是多本，都返回同样的数据类型
+    def package_single(self,keyword,data):
+        returned = {
+            'keyword':keyword,
+            'book':[],
+            'total':0
+        }
+        if data:
+            returned['total'] = 1
+            returned['book'] = [self.cut_data(data)]
+        return returned
+
+    def package_collection(self,keyword,data):
+        returned = {
+            'keyword':keyword,
+            'book':[],
+            'total':0
+        }
+        if data:
+            returned['total'] = len(data['books'])
+            # 对单项数据进行处理，遇到多项的数据，就可以直接复用，这是一种编程思维
+            returned['book'] = [self.cut_data(book) for book in data['books']]
+        return returned
+    
+    def cut_data(self,data):
+        # 这里需要重写和测试
+        book =  {
+            'title':data['title'],
+            'publisher':data['publisher'],
+            'pages':data['pages'] or '',
+            'author': '、'.join(data['author']),
+            'price':data['price'] or '',
+            'summary':data['summary'] or '',
+            'image':data['image']
+        }
+        return book

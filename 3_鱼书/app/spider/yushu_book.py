@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 16:53:12
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-12 15:41:09
+LastEditTime: 2024-10-14 10:30:08
 FilePath: /learnFlask/3_鱼书/app/spider/yushu_book.py
 Description: 
 
@@ -83,7 +83,7 @@ class YuShuBook:
     api_key = '0ac44ae016490db2204ce0a042db2916'
 
     
-    def search_by_isbn(self ,isbn):
+    def search_by_isbn(self ,isbn,session):
         headers = {
             'User-Agent':'MicroMessenger/',
             'Referer':'https://servicewechat.com/wx2f9b06c1de1ccfca/91/page-frame.html'
@@ -92,7 +92,7 @@ class YuShuBook:
             'apiKey':self.api_key,
         }
         # current_app.logger.info(url)    
-        result = HTTP.get(self.douban_isbn_api+isbn,return_json=True,params=params,headers=headers)
+        result = HTTP.get(self.douban_isbn_api+isbn,session=session,return_json=True,params=params,headers=headers)
         '''
         # 先从数据库查一下isbn，有的话直接返回
         # 没有的话，调用豆瓣api
@@ -114,7 +114,7 @@ class YuShuBook:
         self.__fill_single(result,isbn)
     
     
-    def search_by_keyword(self,q):
+    def search_by_keyword(self,q,session):
         current_app.logger.info('keyword搜索,keyword: %s' % q)
         headers = {
             'Referer':'https://servicewechat.com/wx2f9b06c1de1ccfca/95/page-frame.html',
@@ -128,7 +128,7 @@ class YuShuBook:
             'apiKey':self.api_key,
         }
         
-        result = HTTP.get(self.douban_keyword_api,return_json=True,params=params,headers=headers)
+        result = HTTP.get(self.douban_keyword_api,session=session,return_json=True,params=params,headers=headers)
         self.__fill_collection(result,q)
     
     def __fill_single(self,data,q):

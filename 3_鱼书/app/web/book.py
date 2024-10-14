@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 17:13:43
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-12 13:07:40
+LastEditTime: 2024-10-14 10:37:34
 FilePath: /learnFlask/3_鱼书/app/web/book.py
 Description: 
     Blueprint 蓝图的作用是在大型项目中分拆模块的，而不是简单拆文件
@@ -20,7 +20,7 @@ import json
 from flask import render_template
 from flask import flash
 from . import web
-
+import requests
 # @web.route('/book/search/<q>')
 # def search(q):
 #     # r = flask_request.args.to_dict()
@@ -55,17 +55,15 @@ def search():
         q = form.q.data.strip() #获取搜索关键字
         current_app.logger.info('q: %s' % q)
         isbn_or_key = is_isbn_or_key(q)
-
-        yushubook = YuShuBook()
-        
-        if isbn_or_key == 'isbn':
-            print("++++++++search by isbn++++++++")
-            yushubook.search_by_isbn(q)
-        else:
-            yushubook.search_by_keyword(q)
-        books.fill(yushubook)
-        # return jsonify(books.dict())   # 调用的事__dict__方法,会把对象所有的属性都返回,如果里面有一个object（列表）则还是不能返回，需要调用这个object的__dict__方法
-        return json.dumps(books,default=lambda x:x.__dict__,ensure_ascii=False) # ensure_ascii=False 参数，以确保中文字符不会被转义为 Unicode 编码。这样可以保留中文字符的原始形式。
+        with requests.session() as session: # 创建session对象
+            yushubook = YuShuBook()
+            if isbn_or_key == 'isbn':
+                yushubook.search_by_isbn(q,session)
+            else:
+                yushubook.search_by_keyword(q,session)
+            books.fill(yushubook,session)
+            # return jsonify(books.dict())   # 调用的事__dict__方法,会把对象所有的属性都返回,如果里面有一个object（列表）则还是不能返回，需要调用这个object的__dict__方法
+            return json.dumps(books,default=lambda x:x.__dict__,ensure_ascii=False) # ensure_ascii=False 参数，以确保中文字符不会被转义为 Unicode 编码。这样可以保留中文字符的原始形式。
     else:
 
         print("hello")
