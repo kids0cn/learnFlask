@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 17:13:43
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-14 16:36:05
+LastEditTime: 2024-10-15 17:56:43
 FilePath: /learnFlask/3_鱼书/app/web/book.py
 Description: 
     Blueprint 蓝图的作用是在大型项目中分拆模块的，而不是简单拆文件
@@ -73,16 +73,33 @@ def search():
 
 @web.route('/book/<isbn>/detail')
 def book_detail(isbn):
-    # TODO：封装youshubook,BOOKVIEWMODEL添加self.isbn，否则前段调用不到isbn
+
+
+    has_in_gifts = False
+    has_in_wishes = False
+
+    # TODO：封装youshubook,BOOKVIEWMODEL添加self.isbn，否则前端调用不到isbn
     with requests.session() as session:
         yushubook = YuShuBook()
         yushubook.search_by_isbn(isbn,session)
         book = BookViewModel_single(yushubook.book)
         return render_template('book_detail.html',book=book)
+    
+        if current_user.is_authenticated:
+            if Gift.query.filter_by(isbn=isbn,uid=current_user.id,launched=False).first():
+                has_in_gifts = True
+            if Wish.query.filter_by(isbn=isbn,uid=current_user.id,launched=False).first():
+                has_in_wishes = True
 
+        # 显示所有赠送者的信息都查出来
+        trade_gifts = Gift.query.filter_by(isbn=isbn,launched=False).all()
+        # 显示所有心愿者的信息都查出来
+        trade_wishes = Wish.query.filter_by(isbn=isbn,launched=False).all()
 
+        trade_gifts_model = TradeInfo(trade_gifts)  
+        trade_wishes_model = TradeInfo(trade_wishes)
 
-
+        return render_template('book_detail.html',book=book,trade_gifts=trade_gifts_model,trade_wishes=trade_wishes_model,has_in_gifts=has_in_gifts,has_in_wishes=has_in_wishes)
 
 
 # @web.route('/test')

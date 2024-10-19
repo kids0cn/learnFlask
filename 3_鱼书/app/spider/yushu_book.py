@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 16:53:12
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-14 10:30:08
+LastEditTime: 2024-10-19 17:42:56
 FilePath: /learnFlask/3_鱼书/app/spider/yushu_book.py
 Description: 
 
@@ -72,7 +72,7 @@ class YuShuBook_old:
 class YuShuBook:
     # 这个类之所以是伪类是因为把所有的方法数据都返回给了别人，自己没有存储数据
     def __init__(self):
-        self.total = 0;
+        self.total = 0
         self.keyword = ''
         self.books = []
 

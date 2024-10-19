@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-08 21:55:17
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-14 16:01:51
+LastEditTime: 2024-10-18 16:09:08
 FilePath: /learnFlask/3_鱼书/app/view_models/book.py
 Description: 
 
@@ -51,7 +51,7 @@ class BookViewModel_single:
             self.publisher = '、'.join(response['press'])
             self.pages = response['pages'] or ''
             self.author = '、'.join(response['author'])
-            self.price = response['price'][0]
+            self.price = response['price'][0] or ''
             self.summary = response['intro'].replace('\n','') or ''
             self.image = response['pic']['large']
             # with open('response.txt','a',encoding='utf-8') as f:
