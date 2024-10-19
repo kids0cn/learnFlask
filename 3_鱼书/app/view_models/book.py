@@ -42,18 +42,20 @@ class BookViewModel_single:
     集合就是把多本书分别交给单本来处理
 
     '''
-    def __init__(self,response):
+    def __init__(self,response,isbn):
         # with open('response.txt','a',encoding='utf-8') as f:
         #     f.write(str(response))
         #     f.write('++\n')
         if response:
-            self.title = response.get('title','Null title')+response.get('book_subtitle','')
+            self.title = response.get('title','Null title')+':'+response.get('book_subtitle','')
             self.publisher = '、'.join(response['press'])
-            self.pages = response['pages'] or ''
+            self.pages = response['pages'][0] or ''
             self.author = '、'.join(response['author'])
             self.price = response['price'][0] or ''
-            self.summary = response['intro'].replace('\n','') or ''
+            self.summary = response['intro']  or ''
             self.image = response['pic']['large']
+            self.pubdate = response['pubdate'][0]
+            self.isbn = isbn
             # with open('response.txt','a',encoding='utf-8') as f:
             #     f.write(str(self.title))
             #     f.write('\n')
@@ -93,7 +95,7 @@ class BookViewModel_collection:
         # print(yushu_book.keyword)
         self.keyword = yushu_book.keyword
         if self.total ==1 :            
-            self.books.append(BookViewModel_single(yushu_book.books))
+            self.books.append(BookViewModel_single(yushu_book.books,yushu_book.isbn))
         else:
             self.__process_multibooks(yushu_book.books,session)
 

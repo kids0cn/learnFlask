@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 17:13:43
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-15 17:56:43
+LastEditTime: 2024-10-19 17:48:48
 FilePath: /learnFlask/3_鱼书/app/web/book.py
 Description: 
     Blueprint 蓝图的作用是在大型项目中分拆模块的，而不是简单拆文件
@@ -78,13 +78,15 @@ def book_detail(isbn):
     has_in_gifts = False
     has_in_wishes = False
 
-    # TODO：封装youshubook,BOOKVIEWMODEL添加self.isbn，否则前端调用不到isbn
+    
     with requests.session() as session:
         yushubook = YuShuBook()
         yushubook.search_by_isbn(isbn,session)
-        book = BookViewModel_single(yushubook.book)
+        book = BookViewModel_single(yushubook.books,yushubook.isbn)
         return render_template('book_detail.html',book=book)
     
+
+    # 心愿单逻辑
         if current_user.is_authenticated:
             if Gift.query.filter_by(isbn=isbn,uid=current_user.id,launched=False).first():
                 has_in_gifts = True

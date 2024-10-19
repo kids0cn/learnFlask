@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 16:53:12
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-19 17:42:56
+LastEditTime: 2024-10-19 17:46:37
 FilePath: /learnFlask/3_鱼书/app/spider/yushu_book.py
 Description: 
 
@@ -75,6 +75,7 @@ class YuShuBook:
         self.total = 0
         self.keyword = ''
         self.books = []
+        self.isbn = ''
 
     # isbn_url = 'http://t.yushu.im/v2/book/isbn/{}'
     # keyword_url = 'http://t.yushu.im/v2/book/search?q={}&count={}&start={}'
@@ -110,7 +111,6 @@ class YuShuBook:
                 return None
 
         '''
-
         self.__fill_single(result,isbn)
     
     
@@ -136,6 +136,7 @@ class YuShuBook:
             self.total = 1
             self.books = data
             self.keyword = q
+            self.isbn = q
 
     def __fill_collection(self,data,q):
         if data:
