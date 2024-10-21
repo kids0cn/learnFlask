@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-08 21:55:17
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-18 16:09:08
+LastEditTime: 2024-10-21 16:30:50
 FilePath: /learnFlask/3_鱼书/app/view_models/book.py
 Description: 
 
@@ -76,6 +76,7 @@ class BookViewModel_single:
     
     @property
     def intro(self):
+        # 用来显示/作者/出版社/价格 ，如果有一个是空，就不显示，变成['作者'，'价格']
         intros = filter(lambda x:True if x else False,
                         [self.author,self.publisher,self.price])
         # print("+++++++++++++++++++++++++++++++++++++++++++++++++++++")

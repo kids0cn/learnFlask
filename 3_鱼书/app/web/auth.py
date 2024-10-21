@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-14 14:55:25
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-18 16:03:25
+LastEditTime: 2024-10-21 15:27:13
 FilePath: /learnFlask/3_鱼书/app/web/auth.py
 Description: 
 
@@ -20,9 +20,9 @@ from flask_login import login_user
 @web.route('/register',methods = ['get','post']) # 让这个视图函数支持get和post请求
 def register():
     form = RegsiterForm(request.form)
-    if request.method == 'POST':
-        print("Formdata",request.form)
-    print(form.data)
+    # if request.method == 'POST':
+    #     print("Formdata",request.form)
+    # print(form.data)
     if request.method == 'POST' and form.validate(): # 如果请求方式是post，并且表单验证通过
         # 要操作数据库
         print("0000000验证成功")

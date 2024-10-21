@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-14 16:38:28
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-18 16:02:25
+LastEditTime: 2024-10-21 17:17:56
 FilePath: /learnFlask/3_鱼书/app/models/base.py
 Description: 
 
@@ -41,6 +41,7 @@ class SQLAlchemy(_SQLAlchemy):
 db = SQLAlchemy(query_class=Query)
 
 class Base(db.Model):
+    # 把子模型都需要有参数放到基类里
     __abstract__ = True # 定义为抽象类
     status = Column(SmallInteger,default=1)
     create_time = Column('create_time',Integer)
@@ -49,6 +50,7 @@ class Base(db.Model):
         self.create_time = int(datetime.now().timestamp())
 
     def set_attrs(self,attrs_dict):
+        # 遍历传进来的字典，把同名的属性赋值给模型
         for key,value in attrs_dict.items():
             if hasattr(self,key) and key != 'id': 
                 setattr(self,key,value)
