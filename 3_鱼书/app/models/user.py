@@ -21,7 +21,7 @@ from app.models.wish import Wish
 
 
 class User(Base,UserMixin):
-    __tablename__ = 'user' # 决定了写入数据库的表明
+    __tablename__ = 'user' # 决定了写入数据库的表名
     id = Column(Integer,primary_key=True)
     nickname = Column(String(24),nullable=False)
     phone_number = Column(String(18),unique=True)

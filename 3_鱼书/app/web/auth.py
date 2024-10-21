@@ -19,13 +19,21 @@ from flask_login import login_user
 
 @web.route('/register',methods = ['get','post']) # 让这个视图函数支持get和post请求
 def register():
-    form = RegsiterForm()
+    form = RegsiterForm(request.form)
+    if request.method == 'POST':
+        print("Formdata",request.form)
+    print(form.data)
     if request.method == 'POST' and form.validate(): # 如果请求方式是post，并且表单验证通过
         # 要操作数据库
-        with auto_commit():
+        print("0000000验证成功")
+        with db.auto_commit():
+            print("++++++++++++++++++++")
+            print("马上创建新的user表了")
             user = User()
             user.set_attrs(form.data)
             db.session.add(user)
+            print("++++++++++++")
+            print("创建完成了")
         # 注册成功后，跳转到登录页面
         redirect(url_for('web.login'))
     # 如果表单验证不通过，此时form.data里不仅包含了错误信息，还有用户已经输入的数据
