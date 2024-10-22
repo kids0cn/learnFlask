@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-14 16:38:16
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-21 16:20:55
+LastEditTime: 2024-10-22 19:30:16
 FilePath: /learnFlask/3_鱼书/app/models/user.py
 Description: 
 
@@ -69,5 +69,7 @@ class User(Base,UserMixin):
 
         
 @login_manager.user_loader
+#为了给负责管理登录的flask login函数提供一个标识符，能够唯一确定用户身份 
+#集成饿了Usermixin类，就可以使用flask login的函数
 def get_user(uid):
     return User.query.get(int(uid))

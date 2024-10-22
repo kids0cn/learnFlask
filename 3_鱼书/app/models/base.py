@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-14 16:38:28
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-21 17:17:56
+LastEditTime: 2024-10-22 19:51:15
 FilePath: /learnFlask/3_鱼书/app/models/base.py
 Description: 
 
@@ -12,18 +12,25 @@ from flask_sqlalchemy import SQLAlchemy  as  _SQLAlchemy
 from sqlalchemy import Column,SmallInteger,Integer
 from contextlib import contextmanager
 from datetime import datetime
+from sqlalchemy.orm import Query as _Query
 
 
 
 
-class Query(_SQLAlchemy):
+
+
+
+'''
+在 Flask-SQLAlchemy 中，BaseQuery 是一个用于创建自定义查询类的基类。
+它允许你扩展查询功能，以便在查询时添加自定义方法或逻辑。然而，在较新的版本的 
+aFlask-SQLAlchemy 中，BaseQuery 已经被移除，取而代之的是直接使用 Query 类。
+'''
+class Query(_Query):
     def filter_by(self, **kwargs):
         # 就是为了加上status=1的，因为是采用的是假删除，所以要把这个都默认加上
         if 'status' not in kwargs.keys():
             kwargs['status'] = 1
         return super(Query, self).filter_by(**kwargs)
-
-
 
 
 
@@ -36,9 +43,13 @@ class SQLAlchemy(_SQLAlchemy):
         except Exception as e:
             db.session.rollback()
             raise e
-        
+
 
 db = SQLAlchemy(query_class=Query)
+# db = SQLAlchemy()
+
+
+        
 
 class Base(db.Model):
     # 把子模型都需要有参数放到基类里

@@ -43,7 +43,7 @@ def register():
 
 @web.route('/login', methods=['GET', 'POST'])
 def login():
-    form = LoginForm()
+    form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
         user = User.query.filter_by(email=form.email.data).first()
         # 用户存在，则比对密码

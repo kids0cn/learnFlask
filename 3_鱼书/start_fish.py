@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 14:48:16
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-08 20:48:19
+LastEditTime: 2024-10-22 19:00:51
 FilePath: /learnFlask/3_鱼书/start_fish.py
 Description: 
     视图函数不要写太多业务代码，特别的长，特别乱不易于维护
