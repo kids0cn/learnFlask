@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-08 21:55:17
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-21 16:30:50
+LastEditTime: 2024-10-22 22:47:23
 FilePath: /learnFlask/3_鱼书/app/view_models/book.py
 Description: 
 
@@ -174,7 +174,7 @@ class BookViewModel_collection:
         if isbn:
             yushubook = YuShuBook()
             yushubook.search_by_isbn(isbn,session)
-            return BookViewModel_single(yushubook.books)
+            return BookViewModel_single(yushubook.books,yushubook.isbn)
 
 
 

@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-14 14:55:25
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-18 16:03:03
+LastEditTime: 2024-10-23 15:33:42
 FilePath: /learnFlask/3_鱼书/app/web/gift.py
 Description: 
 
@@ -28,6 +28,10 @@ def my_gifts():
 @web.route('/gifts/book/<isbn>')
 @login_required
 def save_to_gifts(isbn):
+    # 赠送书籍到礼物清单
+    # 判断isbn是否合法
+    # 判断是否数据库里有这个书，
+    # 用can_save_to_list方法判断是否可以添加到礼物清单
     if current_user.can_save_to_list(isbn):
         # try:
         #     gift = Gift()
@@ -38,11 +42,11 @@ def save_to_gifts(isbn):
         #     db.session.commit()
         # except Exception as e:
         #     db.session.rollback()  # 若插入出现错误回滚，安全
-        #     raise ei
-        with auto_commit():
+        #     raise e
+        with db.auto_commit():
             gift = Gift()
             gift.isbn = isbn
-            gift.uid = current_user.id
+            gift.uid = current_user.id #由flask_login管理的cookie里的信息
             gift.beans += current_app.config['BEANS_UPLOAD_ONE_BOOK']
             db.session.add(gift)
 

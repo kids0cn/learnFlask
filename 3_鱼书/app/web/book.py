@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 17:13:43
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-19 17:48:48
+LastEditTime: 2024-10-23 15:29:36
 FilePath: /learnFlask/3_鱼书/app/web/book.py
 Description: 
     Blueprint 蓝图的作用是在大型项目中分拆模块的，而不是简单拆文件
@@ -75,15 +75,15 @@ def search():
 def book_detail(isbn):
 
 
-    has_in_gifts = False
-    has_in_wishes = False
+    has_in_gifts = False # 是否在礼物清单中
+    has_in_wishes = False # 是否在心愿单中
 
     
     with requests.session() as session:
         yushubook = YuShuBook()
         yushubook.search_by_isbn(isbn,session)
         book = BookViewModel_single(yushubook.books,yushubook.isbn)
-        return render_template('book_detail.html',book=book)
+        return render_template('book_detail.html',book=book,wishes=[],gifts=[])
     
 
     # 心愿单逻辑
@@ -93,7 +93,7 @@ def book_detail(isbn):
             if Wish.query.filter_by(isbn=isbn,uid=current_user.id,launched=False).first():
                 has_in_wishes = True
 
-        # 显示所有赠送者的信息都查出来
+        # 把所有赠送者的信息都查出来
         trade_gifts = Gift.query.filter_by(isbn=isbn,launched=False).all()
         # 显示所有心愿者的信息都查出来
         trade_wishes = Wish.query.filter_by(isbn=isbn,launched=False).all()

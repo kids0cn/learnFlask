@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-14 16:38:16
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-22 19:30:16
+LastEditTime: 2024-10-23 15:39:51
 FilePath: /learnFlask/3_鱼书/app/models/user.py
 Description: 
 
@@ -19,6 +19,8 @@ from app.spider.yushu_book import YuShuBook
 from app.models.gift import Gift
 from app.models.wish import Wish
 from app import flask_bcrypt
+from app.libs.helper import is_isbn_or_key
+import requests
 
 class User(Base,UserMixin):
     __tablename__ = 'user' # 决定了写入数据库的表名
@@ -46,24 +48,25 @@ class User(Base,UserMixin):
     def check_password(self,raw):
         return flask_bcrypt.check_password_hash(self.__password,raw)
     
-    # def can_save_to_list(self,isbn):
-    #     # 首先判断这个书是否合法
-    #     # 其次判断这个书是否在赠送清单和心愿清单中
-    #     if isbn_or_key != 'isbn':
-    #         return False #不允许添加图书
-    #     yushu_book = YuShuBook()
-    #     yushu_book.search_by_isbn(isbn)
-    #     if not yushu_book.first: # 如果没有这本书，数据库中没有这本书
-    #         return False
-    #     # 不允许一个用户同时赠送多本相同的图书
-    #     # 一个用户不可能同时既想赠送又想收藏一本书
-    #     # 既不在赠送清单，又不在心愿清单才能添加
-    #     gifting = Gift.query.filter_by(uid=self.id,isbn=isbn).first()
-    #     wishing = Wish.query.filter_by(uid=self.id,isbn=isbn).first()
-    #     if not gifting and not wishing:
-    #         return True
-    #     else:
-    #         return False
+    def can_save_to_list(self,isbn):
+        # 首先判断这个书是否合法
+        # 其次判断这个书是否在赠送清单和心愿清单中
+        if is_isbn_or_key(isbn) != 'isbn':
+            return False #不允许添加图书
+        with requests.session() as session:
+            yushu_book = YuShuBook()
+            yushu_book.search_by_isbn(isbn,session)
+        if not yushu_book.first: # 如果没有这本书，数据库中没有这本书
+            return False
+        # 不允许一个用户同时赠送多本相同的图书
+        # 一个用户不可能同时既想赠送又想收藏一本书
+        # 既不在赠送清单，又不在心愿清单才能添加
+        gifting = Gift.query.filter_by(uid=self.id,isbn=isbn,launched=False).first()
+        wishing = Wish.query.filter_by(uid=self.id,isbn=isbn,launched=False).first()
+        if not gifting and not wishing:
+            return True
+        else:
+            return False
         
 
 

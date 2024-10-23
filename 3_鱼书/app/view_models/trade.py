@@ -13,7 +13,7 @@ Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
 class TradeInfo:
     def __init__(self, goods):
         self.total = 0
-        self.trades = []
+        self.trades = [] # 实际的数据
         self.__parse(goods)
 
     def __parse(self,goods):

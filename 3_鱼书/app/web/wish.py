@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-14 14:55:25
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-18 16:02:46
+LastEditTime: 2024-10-23 15:31:25
 FilePath: /learnFlask/3_鱼书/app/web/wish.py
 Description: 
 
@@ -17,6 +17,7 @@ from app.models.base import db
 from flask import current_app, flash, redirect, url_for
 from flask_login import current_user
 
+
 @web.route('/my/wish')
 def my_wish():
     pass
@@ -26,7 +27,7 @@ def my_wish():
 @login_required
 def save_to_wish(isbn):
     if current_user.can_save_to_list(isbn):
-        with auto_commit():
+        with db.auto_commit():
             wish = Wish()
             wish.isbn = isbn
             wish.uid = current_user.id
