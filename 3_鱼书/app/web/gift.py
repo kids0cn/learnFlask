@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-14 14:55:25
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-23 15:33:42
+LastEditTime: 2024-10-23 16:01:19
 FilePath: /learnFlask/3_鱼书/app/web/gift.py
 Description: 
 
@@ -47,12 +47,12 @@ def save_to_gifts(isbn):
             gift = Gift()
             gift.isbn = isbn
             gift.uid = current_user.id #由flask_login管理的cookie里的信息
-            gift.beans += current_app.config['BEANS_UPLOAD_ONE_BOOK']
+            current_user.beans += current_app.config['BEANS_UPLOAD_ONE_BOOK']
             db.session.add(gift)
 
     else:
         flash('这本书已添加到你的赠送清单或心愿清单')
-    return redirect(url_for('web.book.book_detail',isbn=isbn))
+    return redirect(url_for('web.book_detail',isbn=isbn))
     # 用重定向的技术，需要先返回给前端，前端在调用book_detail的视图函数，再返回给前端
     # 不仅需要刷新页面，也会增加服务器压力，用ajax可以在前端做处理，改善服性能
     # 也可以把这个页面缓存起来，直接返回也不用调用新的视图函数

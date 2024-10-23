@@ -2,7 +2,7 @@
 Author: kids0cn kids0cn@gmail.com
 Date: 2024-10-01 16:53:12
 LastEditors: kids0cn kids0cn@gmail.com
-LastEditTime: 2024-10-19 17:46:37
+LastEditTime: 2024-10-23 15:57:43
 FilePath: /learnFlask/3_鱼书/app/spider/yushu_book.py
 Description: 
 
@@ -83,7 +83,12 @@ class YuShuBook:
     douban_keyword_api = 'https://frodo.douban.com/api/v2/search/weixin'
     api_key = '0ac44ae016490db2204ce0a042db2916'
 
-    
+    @property
+    def first(self):
+        # print("++++++++++++")
+        # print(self.total)
+        return self.total if self.total >= 1 else None
+
     def search_by_isbn(self ,isbn,session):
         headers = {
             'User-Agent':'MicroMessenger/',
